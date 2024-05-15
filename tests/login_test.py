@@ -28,7 +28,7 @@ def driver():
     # Create the WebDriver instance
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
-    # Return the driver (optional)
+    # Return the driver
     return driver
 
 def sort_and_print(price):
@@ -39,7 +39,6 @@ def sort_and_print(price):
 def test(driver):
     login_page = LoginPage(driver)
     landing_page = LandingPage(driver)
-    # print("I got here")
     login_page.open_page("https://www.automationexercise.com/")
     # try:
     #     login_page.click_dismiss_button()

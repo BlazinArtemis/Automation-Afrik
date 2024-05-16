@@ -30,8 +30,8 @@ jobs:
           smtp-server: smtp.gmail.com
           smtp-port: 465
           smtp-secure: true
-          from-email: sender@example.com
-          to-email: recipient1@example.com,recipient2@example.com
+          from-email: ${{ secrets.SMTP_USERNAME }}
+          to-email: oluwaseyinexus137@gmail.com,af.afoarinadekunle@gmail.com
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "Automated API Tests Failed in ${{ github.workflow }} on ${{ github.sha }}"

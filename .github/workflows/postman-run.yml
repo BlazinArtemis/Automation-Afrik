@@ -17,7 +17,7 @@ jobs:
           postman collection run "25376308-0e2d67f1-e1c0-4c0e-8243-d038954ae9df"
 
       - name: Send mail
-        if: failure()
+        if: always()
         uses: actions/checkout@v3
         with:
           # mail server settings

@@ -30,10 +30,10 @@ jobs:
           smtp-server: smtp.gmail.com
           smtp-port: 465
           smtp-secure: true
-          from-email: ${{ secrets.SMTP_USERNAME }}
+          from-email: ${{ secrets.EMAIL_USERNAME }}
           to-email: oluwaseyinexus137@gmail.com,af.afoarinadekunle@gmail.com
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Automated API Tests Failed in ${{ github.workflow }} on ${{ github.sha }}"
           body: This is a test email sent from GitHub Actions.
           

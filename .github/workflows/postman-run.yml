@@ -15,22 +15,27 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "25376308-0e2d67f1-e1c0-4c0e-8243-d038954ae9df"
+      - name: Run API tests
+        run: |
+          postman collection run "25376308-0e2d67f1-e1c0-4c0e-8243-d038954ae9df"
 
-      - name: Send mail
-        if: always()
-        uses: actions/checkout@v3
-        with:
-          # mail server settings
-          server_address: smtp.gmail.com
-          server_port: 465
-          # user credentials
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          # email subject
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-          # comma-separated string, send email to
-          to: oluwaseyinexus137@gmail.com,af.afolarinadekunle@gmail.com
-          # from email name
-          from: QA Tester
+      - name: Send email notification on failure (if job fails)
+        uses: actions/checkout@v3  # Checkout code again (optional, for access to secrets)
+        if: always()  # Only run this step if the previous steps failed
+        env:
+          SMTP_HOST: smtp.gmail.com  # Access SMTP host from GitHub Secrets
+          SMTP_PORT: 465  # Access SMTP port from GitHub Secrets
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}  # Access SMTP username from GitHub Secrets
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}  # Access SMTP password from GitHub Secrets
+          EMAIL_RECIPIENTS: "oluwaseyinexus137@gmail.com,af.afolarinadekunle@gmail.com"  # Comma-separated recipient emails
+          EMAIL_SUBJECT: "Automated API Tests Failed in ${{ github.workflow }} on ${{ github.sha }}"  # Dynamic subject with workflow and commit SHA
+          EMAIL_BODY: "The automated API tests failed in the '${{ github.workflow }}' workflow for commit ${{ github.sha }}. See the workflow run for details: ${{ github.action_url }}"  # Dynamic body with workflow and run URL
+        run: |  # Multi-line command for clarity
+          echo "Sending email notification..."
+          nodemailer --host=$SMTP_HOST --port=$SMTP_PORT \
+                      --auth user:$SMTP_USERNAME,pass:$SMTP_PASSWORD \
+                      --from "QA Tester" \
+                      --to="$EMAIL_RECIPIENTS" \
+                      --subject="$EMAIL_SUBJECT" \
+                      --text="$EMAIL_BODY"
+      

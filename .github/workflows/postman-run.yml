@@ -42,5 +42,5 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Automated API Tests Failed in ${{ github.repository }}"
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. To investigate check at ${{ github.action_url }}.
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. To investigate check at ${{ github.event.repository.repo.url }}.
           

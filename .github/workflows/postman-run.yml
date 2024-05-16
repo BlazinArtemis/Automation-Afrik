@@ -23,9 +23,6 @@ jobs:
         run: |
           postman collection run "25376308-0e2d67f1-e1c0-4c0e-8243-d038954ae9df"
 
-      - name: Send email notification on failure (if job fails)
-        uses: smehta/github-action-smtp@v1.1.0  # Replace with your chosen email sending action
-        steps:
       - name: Send Email
         uses: hilarion5/send-mail@v1
         if: always()

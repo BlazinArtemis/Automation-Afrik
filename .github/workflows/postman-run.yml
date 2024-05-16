@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Selenium tests (Headless Chrome)
         run: |
-          python $GITHUB_WORKSPACE/login_test_ci.py  # Replace with your test directory
+          python $GITHUB_WORKSPACE/tests/login_test_ci.py  # Replace with your test directory
 
       - name: Send Email
         uses: hilarion5/send-mail@v1

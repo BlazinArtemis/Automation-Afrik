@@ -25,16 +25,18 @@ jobs:
 
       - name: Send email notification on failure (if job fails)
         uses: smehta/github-action-smtp@v1.1.0  # Replace with your chosen email sending action
-        if: always()  # Only run this step if the previous steps failed
-        env:
-          # Configure email sending details based on the action's requirements
-          # (replace placeholders with your actual values)
-          SMTP_HOST: smtp.gmail.com
-          SMTP_PORT: 465
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          EMAIL_RECIPIENTS: "recipient1@example.com,recipient2@example.com"
-          EMAIL_SUBJECT: "Automated API Tests Failed in ${{ github.workflow }} on ${{ github.sha }}"
-          EMAIL_BODY: "The automated API tests failed in the '${{ github.workflow }}' workflow for commit ${{ github.sha }}. See the workflow run for details: ${{ github.action_url }}"
-
-      
+        steps:
+      - name: Send Email
+        uses: hilarion5/send-mail@v1
+        if: always()
+        with:
+          smtp-server: smtp.example.com
+          smtp-port: 465
+          smtp-secure: true
+          from-email: sender@example.com
+          to-email: recipient1@example.com,recipient2@example.com
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Automated API Tests Failed in ${{ github.workflow }} on ${{ github.sha }}"
+          body: This is a test email sent from GitHub Actions.
+          

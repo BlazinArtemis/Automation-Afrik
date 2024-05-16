@@ -15,3 +15,22 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "25376308-0e2d67f1-e1c0-4c0e-8243-d038954ae9df"
+
+      - name: Send mail
+        if: failure()
+        uses: actions/checkout@v3
+        with:
+          # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          # email body as text
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          # comma-separated string, send email to
+          to: oluwaseyinexus137@gmail.com,af.afolarinadekunle@gmail.com
+          # from email name
+          from: QA Tester

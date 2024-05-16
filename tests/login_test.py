@@ -67,7 +67,6 @@ def test(driver):
         single_products_div = landing_page.single_products_divs(product_image_wrapper_div)
         product_info_div = landing_page.product_info_divs(single_products_div)
         label = landing_page.product_label_text(product_info_div)
-        # print(label)
         price_element = landing_page.find_price(product_info_div)
         price = landing_page.convert_price_to_float(price_element) # Remove "Rs." and convert to float
         # print(price)

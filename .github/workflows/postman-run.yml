@@ -19,12 +19,12 @@ jobs:
   selenium-job:
     runs-on: ubuntu-latest
     steps:
-      -uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Install dependencies start
         run: |
           python -m pip install selenium webdriver_manager
-          
+
       - name: Run Selenium tests (Headless Chrome)
         run: |
           python $GITHUB_WORKSPACE/tests/login_test_ci.py  # Replace with your test directory

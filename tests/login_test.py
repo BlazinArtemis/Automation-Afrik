@@ -24,6 +24,7 @@ def driver():
     # Set up Chrome options (headless mode)
     chrome_options = Options()
     # chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+    chrome_options.add_argument('--headless')
 
     # Create the WebDriver instance
     driver = webdriver.Chrome(service=service, options=chrome_options)

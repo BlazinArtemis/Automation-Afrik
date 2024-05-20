@@ -17,7 +17,7 @@ from pages.confirmation_page import ConfirmationPage
 import unittest
 
 def driver():
-    chromedriver_path = '/home/runner/work/Automation-Afrik/Automation-Afrik/chromedriver'
+    chromedriver_path = '/home/runner/work/Automation-Afrik/Automation-Afrik/chromedrive'
 
     # Create a Service object (recommended)
     service = Service(executable_path=chromedriver_path)
